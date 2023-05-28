@@ -1,6 +1,6 @@
 {
   "name": "@fake-cli-dev/core",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "fake-cli-dev core",
   "author": "charlessliu <charlessliu@tencent.com>",
   "homepage": "",
@@ -22,5 +22,5 @@
   "scripts": {
     "test": "node ./__tests__/core.test.js"
   },
-  "gitHead": "359d54c67a3a3cb3b1607415c9f50865d20ff560"
+  "gitHead": "2072f05d4d71eb2fe785461a7badad3263aa2be0"
 }
