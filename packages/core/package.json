@@ -6,6 +6,9 @@
   "homepage": "",
   "license": "ISC",
   "main": "lib/core.js",
+  "bin": {
+    "fake-cli-dev": "bin/index.js"
+  },
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -19,5 +22,5 @@
   "scripts": {
     "test": "node ./__tests__/core.test.js"
   },
-  "gitHead": "bb6f646c7c7164f866eaeb7b563f8314f7f2c2f1"
+  "gitHead": "359d54c67a3a3cb3b1607415c9f50865d20ff560"
 }
