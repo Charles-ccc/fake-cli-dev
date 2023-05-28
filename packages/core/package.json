@@ -18,5 +18,6 @@
   },
   "scripts": {
     "test": "node ./__tests__/core.test.js"
-  }
+  },
+  "gitHead": "bb6f646c7c7164f866eaeb7b563f8314f7f2c2f1"
 }
