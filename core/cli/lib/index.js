@@ -5,6 +5,7 @@ module.exports = core;
 const semver = require('semver')
 const colors = require('colors')
 
+
 const pkg = require('../package.json')
 const log = require('@fake-cli-dev/log')
 const constant = require('./constants')
@@ -31,4 +32,10 @@ function checkNodeVersion() {
   if (semver.lte(currentVersion, lowestNodeVersion)) {
     throw new Error(colors.red(`fake-cli 需要安装 v${lowestNodeVersion} 以上版本的 Node.js`))
   }
+}
+
+// 检查root账户，proces.geteuid() root账户是0
+function checkRoot() {
+  const rootCheck = require('root-check')
+  rootCheck()
 }
