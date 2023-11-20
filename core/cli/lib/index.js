@@ -11,17 +11,22 @@ const pathExists = require('path-exists').sync
 const pkg = require('../package.json')
 const log = require('@fake-cli-dev/log')
 const constant = require('./constants')
+const commander = require('commander')
 
 let args;
+
+/** 实例化脚手架对象 */
+const program = new commander.Command()
 
 async function core() {
   try {
     checkPkgVersion()
     checkNodeVersion()
     checkUserHome()
-    checkInputArgs()
+    // checkInputArgs()
     checkEnv()
-    checkGlobalUpdate()
+    await checkGlobalUpdate()
+    registerCommander()
   } catch (e) {
     log.error(e.message)
   }
@@ -112,4 +117,37 @@ async function checkGlobalUpdate() {
     log.warn(colors.yellow(`请手动更新 ${npmName}，当前版本：${currentVersion}，最新版本：${lastVersion}
               更新命令：npm install -g ${npmName}`))
   }
+}
+
+// 命令注册
+function registerCommander () {
+  program
+    .usage('<commander> [options]')
+    .name(Object.keys(pkg.bin)[0])
+    .version(pkg.version)
+    .option('-d --debug', '是否开启调试模式', false)
+  
+  // 是否开启debug模式
+  program.on('option:debug', function() {
+    if (program.debug) {
+      process.env.LOG_LEVEL = 'verbose'
+    } else {
+      process.env.LOG_LEVEL = 'info'
+    }
+    log.level = process.env.LOG_LEVEL
+  })
+  // 未知命令监听
+  program.on('command:*', function(obj) {
+    const availableCommands = program.commands.map(cmd => cmd.name())
+    console.log(colors.red('未知的命令：' + obj[0]))
+    if (availableCommands.length > 0) {
+      console.log(colors.blue('可用的命令：' + availableCommands.join(',')))
+    }
+  })
+  // 没有输入有效命令时给出帮助
+  if (program.args && program.args.length < 1) {
+    program.outputHelp()
+    console.log()
+  }
+  program.parse(process.arv);
 }
