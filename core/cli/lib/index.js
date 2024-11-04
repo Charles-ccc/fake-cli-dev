@@ -136,6 +136,15 @@ function registerCommander () {
     }
     log.level = process.env.LOG_LEVEL
   })
+
+  // 是否强制初始化
+  program
+    .command('init [projectName]')
+    .option('-f --force', '是否强制初始化项目')
+    .action((projectName, cmdObj) => {
+      
+    })
+
   // 未知命令监听
   program.on('command:*', function(obj) {
     const availableCommands = program.commands.map(cmd => cmd.name())

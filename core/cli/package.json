@@ -20,6 +20,7 @@
     "@fake-cli-dev/get-npm-info": "file:../../utils/get-npm-info",
     "@fake-cli-dev/log": "file:../../utils/log",
     "@fake-cli-dev/utils": "file:../../utils/utils",
+    "@fake-cli-dev/init": "file:../../commands/init",
     "colors": "^1.4.0",
     "commander": "^11.1.0",
     "dotenv": "^16.3.1",
